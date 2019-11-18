@@ -12,8 +12,7 @@ def main():
     parser.add_argument('--username', '-u', required=True, help='Username to sign into server')
     args = parser.parse_args()
 
-    # password = getpass.getpass('Password: ')
-    password = 'T@bleau8'
+    password = getpass.getpass('Password: ')
 
     tableau_auth = TSC.TableauAuth(args.username, password, args.site)
     server = TSC.Server(args.server, use_server_version=True)
