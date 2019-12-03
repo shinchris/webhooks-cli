@@ -19,4 +19,4 @@ These instructions will provide you with step-by-step instructions on basics of 
 1. From this page, you can either sign up for a new account or sign in using your existing credentials. The sign in button is located on the top right corner of the page.
 1. After you sign in, go back to the Sandbox Site page, and click on the button to **Get Site**.
 
-![Get Site](/assets/Get Site.png)
+![Get Site](/assets/Get%20Site.png)
