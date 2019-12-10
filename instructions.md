@@ -26,4 +26,21 @@ A successful sign in should take you to the main page of your site.
 
 ### Step 2: Postman
 1. You can download Postman from their [download page](https://www.getpostman.com/downloads/).
-1. Open up Postman
+1. Open up Postman.
+1. Open up the Import dialog by going to **File -> Import...**.
+1. Click the **Choose Files** button and import both of the .json files you've downloaded (Tableau Collection.json and Tableau Environment.json).
+![Postman Import](/assets/Postman%20Import.png)
+1. After a successful import, you should be able to see the imported Collection and Environment as shown below. (If you can't see the collections panel, you may have to toggle the side bar from the bottom left corner).
+![Postman Post Import](/assets/Postman%20Post%20Import.png)
+1. From the **Environment** dropdown menu on the top right corner of Postman, ensure that you have **Tableau Environment** selected.
+
+### Step 3: Webhook test site
+1. Open up [https://webhook.site](https://webhook.site)
+1. This is a Webhook test site, useful for testing that a Webhook fires properly. For now, you don't need to do anything on this site, but it will be used in **Module 2**.
+
+***
+
+## Module 2: Creating a Webhook
+### Step 1: Sign in to Tableau Server
+1. In Postman, click on the **Collections** tab and open up **Tableau Collection**. Then open up either the **XML** or the **JSON** folder, whichever one you prefer to use.
+1. Click on the **Sign in** request to open it up in the main panel. Look through the **Body** and **Header** tabs, just below the sign in request URL to see more details.
