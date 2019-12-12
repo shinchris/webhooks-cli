@@ -9,7 +9,7 @@ These instructions will provide you with step-by-step instructions on basics of 
 
 ## Module 1: Preparation
 ### What you will need:
-1. Tableau Server - We recommend using your free **Tableau Developer Program online site**! You can also use any other Tableau Server instance, as long as it is on the 2019.4 version. 
+1. Tableau Server - We recommend using your free **Tableau Developer Program online site**! The instructures assume you are using your Developer Program online site, but you can also use any other Tableau Server instance, as long as it is on the 2019.4 version.
 1. Postman - A free third-party application which allows us to interact with the Tableau Server [REST API](https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api.htm). If you would rather use a CLI (command-line interface) tool to interact with the Tableau Server REST API, visit the [webhooks-cli](https://github.com/shinchris/webhooks-cli/) repository on Github for more information.
 1. Webhook test site - A simple external server that will receive your Webhooks and display them to you.
 
@@ -43,4 +43,44 @@ A successful sign in should take you to the main page of your site.
 ## Module 2: Creating a Webhook
 ### Step 1: Sign in to Tableau Server
 1. In Postman, click on the **Collections** tab and open up **Tableau Collection**. Then open up either the **XML** or the **JSON** folder, whichever one you prefer to use.
-1. Click on the **Sign in** request to open it up in the main panel. Look through the **Body** and **Header** tabs, just below the sign in request URL to see more details.
+1. Click on the **Sign in** request to open it up in the main panel. Look through the **Body** and **Header** tabs, just below the sign in request URL to see more details. Notice the Postman variables denoted by the double curly brackets, **{{variable}}**.
+1. In order to set the variables, click on the eye icon located in the top right corner of the application, right next to the **Environment** dropdown menu. In the dialog that pops up, click on the **Edit** button to edit the **Tableau Environment**.
+![Postman Edit Environment](/assets/Postman%20Edit%20Environment.png)
+1. In the **Manage Environments** dialog, you need to fill out the variables in the **CURRENT VALUE** column. For the sign in request, you will only need to set the username, password, and the server URL.
+    - **Username**: Your email used to sign in to your Online site.
+    - **Password**: Your password used to sign in to your Online site.
+    - **Server**: **https://10ax.online.tableau.com**.
+    - **Site-name**: Name of your site in the URL (found in browser). If your online site URL is https://10ax.online.tableau.com/#/site/mysitedev123/home, the **mysitedev123** would be your site name.
+![Postman Manage Environment](/assets/Postman%20Manage%20Environment.png)
+1. After you've set the 4 variables, click on the orange **Update** button located on the bottom right corner of the dialog.
+1. Close the dialog and click the blue **Send** button to send the request. You should be able to see the response body on the bottom part of Postman.
+    - JSON response should look something like this:
+    ![JSON Signin Response](/assets/JSON%20Signin%20Response.png)
+    - XML response should look something like this:
+    ![XML Signin Response](/assets/XML%20Signin%20Response.png)
+
+### Step 2: Get site-id and auth token
+1. Look at the response from the sign in request and find the **site-id** and **token** values.
+1. Copy the **site-id** value from the response and set the **site-id** variable.
+1. Copy the **token** value from the response and set the **tableau-auth-token** variable.
+![Environment](/assets/Environment.png)
+
+### Step 3: Create a Webhook
+1. Let's now fill in the next 3 variables. The last variable is for later, after we've created a Webhook.
+    - **Webhook-name**: **my-webhook**
+    - **Webhook-url**: URL copied from your Webhook test site from Module 1, step 3. Go to the page and make sure to click on the green **Copy** button on the top right corner of the page.
+    - **Webhook-source-api-event-name**: **webhook-source-event-workbook-created**
+1. After updating the variables, click on the **Create a webhook** request in the collection pane on the left.
+1. We already have all the required variables set, so click the blue **Send** button to send the request.
+    - JSON response should look something like this:
+    ![JSON Create Response](/assets/JSON%20Create%20Response.png)
+    - XML response should look something like this:
+    ![XML Create Response](/assets/XML%20Create%20Response.png)
+1. From the response, copy the Webhook **id** value and paste that into the last remaining environment variable, **webhook-id**.
+
+### Step 4: (Bonus) List, Get, Delete, and Test
+Congratulations on creating your very first Webhook! Now that you have a webhook created, you can use the other endpoints in the collection. Feel free to explore and try out some of these endpoints.
+1. **List Webhooks**: This endpoint lets you list out all Webhooks that exist on your site. Try creating more Webhooks to get more than one result.
+1. **Get a Webhook**: This endpoint lets you get a specific Webhook, by its unique id. If you have more than one Webhook, you will have to change the **webhook-id** environment variable to specify a different Webhook each time.
+1. **Test a Webhook**: This endpoint lets you test out a Webhook, by its unique id. When you send this request, the Webhook will fire and you will be able to see the result in the Webhook test site!
+1. **Delete a Webhook**: This endpoint lets you delete a Webhook, by its unique id. **If you use the delete endpoint, be sure to re-create a Webhook before moving on to the next module!**
