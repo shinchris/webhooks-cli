@@ -73,7 +73,6 @@ A successful sign in should take you to the main page of your site.
 1. After updating the variables, click on the **Create a webhook** request in the collection pane on the left.
 1. We already have all the required variables set, so click the blue **Send** button to send the request.
     - JSON response should look something like this:
-    ![JSON Create Response](/assets/JSON%20Create%20Response.png)
     - XML response should look something like this:
     ![XML Create Response](/assets/XML%20Create%20Response.png)
 1. From the response, copy the Webhook **id** value and paste that into the last remaining environment variable, **webhook-id**.
