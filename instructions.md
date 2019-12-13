@@ -13,7 +13,7 @@ These instructions will provide you with step-by-step instructions on basics of 
 1. Postman - A free third-party application which allows us to interact with the Tableau Server [REST API](https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api.htm). If you would rather use a CLI (command-line interface) tool to interact with the Tableau Server REST API, visit the [webhooks-cli](https://github.com/shinchris/webhooks-cli/) repository on Github for more information.
 1. Webhook test site - A simple external server that will receive your Webhooks and display them to you.
 
-### Step 1: Tableau Server
+### Part 1: Tableau Server
 **If you have already activated your free Developer Sandbox Site or are planning on using another Tableau Server instance, then you can skip this step.**
 1. Go to the Tableau Developer Program [Sandbox Site page](https://tableau.com/developer/get-site).
 1. From this page, you can either sign up for a new account or sign in using your existing credentials. The sign in button is located on the top right corner of the page.
@@ -24,7 +24,7 @@ These instructions will provide you with step-by-step instructions on basics of 
 A successful sign in should take you to the main page of your site.
 ![Tableau Online](/assets/Tableau%20Online.png)
 
-### Step 2: Postman
+### Part 2: Postman
 1. You can download Postman from their [download page](https://www.getpostman.com/downloads/).
 1. Open up Postman.
 1. Open up the Import dialog by going to **File -> Import...**.
@@ -34,14 +34,14 @@ A successful sign in should take you to the main page of your site.
 ![Postman Post Import](/assets/Postman%20Post%20Import.png)
 1. From the **Environment** dropdown menu on the top right corner of Postman, ensure that you have **Tableau Environment** selected.
 
-### Step 3: Webhook test site
+### Part 3: Webhook test site
 1. Open up [https://webhook.site](https://webhook.site)
 1. This is a Webhook test site, useful for testing that a Webhook fires properly. For now, you don't need to do anything on this site, but it will be used in **Module 2**.
 
 ***
 
 ## Module 2: Creating a Webhook
-### Step 1: Sign in to Tableau Server
+### Part 1: Sign in to Tableau Server
 1. In Postman, click on the **Collections** tab and open up **Tableau Collection**. Then open up either the **XML** or the **JSON** folder, whichever one you prefer to use.
 1. Click on the **Sign in** request to open it up in the main panel. Look through the **Body** and **Header** tabs, just below the sign in request URL to see more details. Notice the Postman variables denoted by the double curly brackets, **{{variable}}**.
 1. In order to set the variables, click on the eye icon located in the top right corner of the application, right next to the **Environment** dropdown menu. In the dialog that pops up, click on the **Edit** button to edit the **Tableau Environment**.
@@ -59,13 +59,13 @@ A successful sign in should take you to the main page of your site.
     - XML response should look something like this:
     ![XML Signin Response](/assets/XML%20Signin%20Response.png)
 
-### Step 2: Get site-id and auth token
+### Part 2: Get site-id and auth token
 1. Look at the response from the sign in request and find the **site-id** and **token** values.
 1. Copy the **site-id** value from the response and set the **site-id** variable.
 1. Copy the **token** value from the response and set the **tableau-auth-token** variable.
 ![Environment](/assets/Environment.png)
 
-### Step 3: Create a Webhook
+### Part 3: Create a Webhook
 1. Let's now fill in the next 3 variables. The last variable is for later, after we've created a Webhook.
     - **Webhook-name**: **my-webhook**
     - **Webhook-url**: URL copied from your Webhook test site from Module 1, step 3. Go to the page and make sure to click on the green **Copy** button on the top right corner of the page.
@@ -78,9 +78,28 @@ A successful sign in should take you to the main page of your site.
     ![XML Create Response](/assets/XML%20Create%20Response.png)
 1. From the response, copy the Webhook **id** value and paste that into the last remaining environment variable, **webhook-id**.
 
-### Step 4: (Bonus) List, Get, Delete, and Test
+### Part 4: (Bonus) List, Get, Delete, and Test
 Congratulations on creating your very first Webhook! Now that you have a webhook created, you can use the other endpoints in the collection. Feel free to explore and try out some of these endpoints.
 1. **List Webhooks**: This endpoint lets you list out all Webhooks that exist on your site. Try creating more Webhooks to get more than one result.
 1. **Get a Webhook**: This endpoint lets you get a specific Webhook, by its unique id. If you have more than one Webhook, you will have to change the **webhook-id** environment variable to specify a different Webhook each time.
 1. **Test a Webhook**: This endpoint lets you test out a Webhook, by its unique id. When you send this request, the Webhook will fire and you will be able to see the result in the Webhook test site!
 1. **Delete a Webhook**: This endpoint lets you delete a Webhook, by its unique id. **If you use the delete endpoint, be sure to re-create a Webhook before moving on to the next module!**
+
+***
+
+## Module 3: Firing a Webhook
+### Part 1: Creating a Workbook
+1. From your browser, navigate back to your Tableau Online site.
+1. Click on the **Explore** tab on the left menu panel. Then, navigate to the **Default** project.
+1. Click on the **Create** button. Select **Workbook** to create a new workbook in web authoring mode.
+![Create Workbook](/assets/Create%20Workbook.png)
+1. In web authoring mode, select the **Superstore Datasource** and click **Connect**.
+![Connect Datasource](/assets/Connect%20Datasource.png)
+1. Create a simple workbook, or you can leave it blank. 
+1. Save the workbook. This should trigger the Webhook you've created in the previous module!
+![Save Workbook](/assets/Save%20Workbook.png)
+
+### Part 2: Verifying your Webhook
+1. From your browser, navigate back to your Webhook test site opened up in Module 1, Part 3.
+1. In the body, you should be able to see the JSON response that contains more information about the event. **Tip:** Check the **Format JSON** checkbox to prettify the JSON response.
+![Webhook Test Site JSON](/assets/Webhook%20Test%20Site%20JSON.png)
