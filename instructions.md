@@ -9,7 +9,7 @@ These instructions will provide you with step-by-step instructions on basics of 
 
 ## Module 1: Preparation
 ### What you will need:
-1. Tableau Server - We recommend using your free **Tableau Developer Program online site**! The instructures assume you are using your Developer Program online site, but you can also use any other Tableau Server instance, as long as it is on the 2019.4 version.
+1. Tableau Server - We recommend using your free **Tableau Developer Program online site**! These instructions will assume you are using your Developer Program online site, but you can also use any other Tableau Server instance, as long as it is on the 2019.4 version.
 1. Postman - A free third-party application which allows us to interact with the Tableau Server [REST API](https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api.htm). If you would rather use a CLI (command-line interface) tool to interact with the Tableau Server REST API, visit the [webhooks-cli](https://github.com/shinchris/webhooks-cli/) repository on Github for more information.
 1. Webhook test site - A simple external server that will receive your Webhooks and display them to you.
 
@@ -103,3 +103,25 @@ Congratulations on creating your very first Webhook! Now that you have a webhook
 1. From your browser, navigate back to your Webhook test site opened up in Module 1, Part 3.
 1. In the body, you should be able to see the JSON response that contains more information about the event. **Tip:** Check the **Format JSON** checkbox to prettify the JSON response.
 ![Webhook Test Site JSON](/assets/Webhook%20Test%20Site%20JSON.png)
+
+### Part 3: (Bonus) Changing Webhook event type
+1. Workbook publish event is one of 13 events that we support today (more to come!). You can see the full list of events below.
+
+    | Friendly Event Name | API Event Name |
+    | --------- | --------- |
+    | DatasourceUpdated | webhook-source-event-datasource-updated |
+    | DatasourceCreated | webhook-source-event-datasource-created |
+    | DatasourceDeleted | webhook-source-event-datasource-deleted |
+    | DatasourceRefreshStarted | webhook-source-event-datasource-refresh-started |
+    | DatasourceRefreshSucceeded | webhook-source-event-datasource-refresh-succeeded |
+    | DatasourceRefreshFailed | webhook-source-event-datasource-refresh-failed |
+    | WorkbookUpdated | webhook-source-event-workbook-updated |
+    | WorkbookCreated | webhook-source-event-workbook-created |
+    | WorkbookDeleted | webhook-source-event-workbook-deleted |
+    | ViewDeleted | webhook-source-event-view-deleted |
+    | WorkbookRefreshStarted | webhook-source-event-workbook-refresh-started |
+    | WorkbookRefreshSucceeded | webhook-source-event-workbook-refresh-succeeded |
+    | WorkbookRefreshFailed | webhook-source-event-workbook-refresh-failed |
+1. Pick an event from the list above and replace the **webhook-source-api-event-name** environment variable in Postman with the corresponding value from the **API Event Name** column.
+1. Send the request in Postman to create a new Webhook with the event type you have chosen.
+1. Try to trigger the newly created Webhook using Tableau Desktop or Tableau Server and verify them in the Webhook test site.
