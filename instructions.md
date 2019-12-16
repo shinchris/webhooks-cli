@@ -46,11 +46,11 @@ A successful sign in should take you to the main page of your site.
 1. Click on the **Sign in** request to open it up in the main panel. Look through the **Body** and **Header** tabs, just below the sign in request URL to see more details. Notice the Postman variables denoted by the double curly brackets, **{{variable}}**.
 1. In order to set the variables, click on the eye icon located in the top right corner of the application, right next to the **Environment** dropdown menu. In the dialog that pops up, click on the **Edit** button to edit the **Tableau Environment**.
 ![Postman Edit Environment](/assets/Postman%20Edit%20Environment.png)
-1. In the **Manage Environments** dialog, you need to fill out the variables in the **CURRENT VALUE** column. For the sign in request, you will only need to set the username, password, and the server URL.
+1. In the **Manage Environments** dialog, you need to fill out the variables in the **CURRENT VALUE** column. For the sign in request, you will only need to set the username, password, the server URL, and the site name.
     - **Username**: Your email used to sign in to your Online site.
     - **Password**: Your password used to sign in to your Online site.
     - **Server**: **https://10ax.online.tableau.com**.
-    - **Site-name**: Name of your site in the URL (found in browser). If your online site URL is https://10ax.online.tableau.com/#/site/mysitedev123/home, the **mysitedev123** would be your site name.
+    - **Site-name**: Name of your site in the URL (found in browser). If your online site URL is https://10ax.online.tableau.com/#/site/mysitedev123/home, then **mysitedev123** would be your site name.
 ![Postman Manage Environment](/assets/Postman%20Manage%20Environment.png)
 1. After you've set the 4 variables, click on the orange **Update** button located on the bottom right corner of the dialog.
 1. Close the dialog and click the blue **Send** button to send the request. You should be able to see the response body on the bottom part of Postman.
@@ -125,3 +125,8 @@ Congratulations on creating your very first Webhook! Now that you have a webhook
 1. Pick an event from the list above and replace the **webhook-source-api-event-name** environment variable in Postman with the corresponding value from the **API Event Name** column.
 1. Send the request in Postman to create a new Webhook with the event type you have chosen.
 1. Try to trigger the newly created Webhook using Tableau Desktop or Tableau Server and verify them in the Webhook test site.
+
+***
+
+## Module 4: (Bonus) Tableau Webhooks + Automate.io
+Now that we have a Webhook created, let's take a look at how to integrate it into a third-party workflow management application. In the previous module, our destination URL was a Webhook test site that simply listed out all the Webhooks that it received. We can now replace that destination URL With Automate.io, a third-party workflow management application which allows you to integrate Tableau Webhooks with hundreds of other applications. Automate.io can be configured to listen to your Tableau Webhook and take an action on a number of applications that they support.
