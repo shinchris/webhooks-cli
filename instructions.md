@@ -129,4 +129,9 @@ Congratulations on creating your very first Webhook! Now that you have a webhook
 ***
 
 ## Module 4: (Bonus) Tableau Webhooks + Automate.io
-Now that we have a Webhook created, let's take a look at how to integrate it into a third-party workflow management application. In the previous module, our destination URL was a Webhook test site that simply listed out all the Webhooks that it received. We can now replace that destination URL With Automate.io, a third-party workflow management application which allows you to integrate Tableau Webhooks with hundreds of other applications. Automate.io can be configured to listen to your Tableau Webhook and take an action on a number of applications that they support.
+Now that we have a Webhook created, let's take a look at how to integrate it into a third-party workflow management application. In the previous module, our destination URL was a Webhook test site that simply listed out all the Webhooks that it received. We can now replace that destination URL With **Automate.io**, a third-party workflow management application which allows you to integrate Tableau Webhooks with hundreds of other applications. Automate.io can be configured to listen to your Tableau Webhook and take an action on a number of applications that they support.
+
+1. Go to [automate.io](https://automate.io) and follow the directions to sign up for an account.
+1. Sign in to automate.io.
+1. From the dashboard page, click on **Create a Bot** button located near the top right corner of the page.
+![Automate IO Dashboard](/assets/Automate%20IO%20Dashboard.png)
