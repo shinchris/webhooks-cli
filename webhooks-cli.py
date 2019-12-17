@@ -5,17 +5,20 @@ import tableauserverclient as TSC
 
 def main():
     parser = argparse.ArgumentParser(description='Interact with Webhooks on Tableau Server.')
-    parser.add_argument('action', choices=['create', 'get', 'list', 'delete'],
+    parser.add_argument('action', choices=['create', 'get', 'list', 'delete', 'test'],
                         help='Action to take with Webhooks')
-    parser.add_argument('--server', '-S', required=True, help='Server address')
-    parser.add_argument('--site', '-s', required=True, help='Site name')
-    parser.add_argument('--username', '-u', required=True, help='Username to sign into server')
+    parser.add_argument('--server', '-S', help='Server address')
+    parser.add_argument('--site', '-s', help='Site name')
+    parser.add_argument('--username', '-u', help='Username to sign into server')
     args = parser.parse_args()
 
+    server = args.server if args.server else input('Server URL: ')
+    site = args.site if args.site else input('Site name: ')
+    username = args.username if args.username else input('Username: ')
     password = getpass.getpass('Password: ')
 
-    tableau_auth = TSC.TableauAuth(args.username, password, args.site)
-    server = TSC.Server(args.server, use_server_version=True)
+    tableau_auth = TSC.TableauAuth(username, password, site)
+    server = TSC.Server(server, use_server_version=True)
 
     with server.auth.sign_in(tableau_auth):
         print('Signed into ' + tableau_auth.site_id + '.')
@@ -29,6 +32,8 @@ def main():
             list_webhooks(server)
         elif action == 'delete':
             delete_webhook(server)
+        elif action == 'test':
+            test_webhook(server)
 
 
 def create_webhook(server):
@@ -81,6 +86,16 @@ def delete_webhook(server):
     server.webhooks.delete(webhook_id)
 
     print('Successfully deleted webhook ' + webhook_id + '.')
+
+
+def test_webhook(server):
+    webhook_id = input('Webhook ID: ')
+    print('Testing webhook ' + webhook_id + '...')
+
+    test_response = server.webhooks.test(webhook_id)
+
+    print('Test result: ')
+    print(test_response.__dict__)
 
 
 def get_owner_name(server, owner_id):
