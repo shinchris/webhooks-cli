@@ -131,7 +131,40 @@ Congratulations on creating your very first Webhook! Now that you have a webhook
 ## Module 4: (Bonus) Tableau Webhooks + Automate.io
 Now that we have a Webhook created, let's take a look at how to integrate it into a third-party workflow management application. In the previous module, our destination URL was a Webhook test site that simply listed out all the Webhooks that it received. We can now replace that destination URL With **Automate.io**, a third-party workflow management application which allows you to integrate Tableau Webhooks with hundreds of other applications. Automate.io can be configured to listen to your Tableau Webhook and take an action on a number of applications that they support.
 
+Automate.io allows you to start for free, but they also offer paid plans for more advanced usage. **Zapier** is another **paid** third-party application that you can use to connect your Webhooks to hundreds of applications. These are no-code integration applications, but you can also write your own external server to listen to your Webhooks.
+
+### Part 1: Signing in to Automate.io
 1. Go to [automate.io](https://automate.io) and follow the directions to sign up for an account.
 1. Sign in to automate.io.
+
+### Part 2: Seting up the trigger app
 1. From the dashboard page, click on **Create a Bot** button located near the top right corner of the page.
 ![Automate IO Dashboard](/assets/Automate%20IO%20Dashboard.png)
+1. In the **Select Trigger App** drop menu, search for and select **Webhooks**.
+![Automate IO Select](/assets/Automate%20IO%20Select.png)
+1. In the **Select the trigger event** drop menu, select **Incoming Hook**.
+1. Click on the **Setup Webhook** button to open up the setup window.
+![Automate IO Setup](/assets/Automate%20IO%20Setup.png)
+1. From the new window, click on the **Copy** button to copy the URL. This URL will be your new destination URL, replacing the https://webhook.site url.
+1. Click on the **I'm Done** button and it will notify you that it is waiting for your Webhook to fire.
+1. Go back to Postman and create a new Webhook using this new destination URL by changing the **webhook-url** variable.
+1. Trigger the Webhook you've just created.
+1. Go back to the Automate.io window with your destination URL. If Automate.io received your Webhook properly, you should see the result on the window.
+![Automate IO Setup Window](/assets/Automate%20IO%20Setup%20Window.png)
+1. Click on the "Looks Good" button to close the window.
+1. Your trigger app configuration should now look like this:
+![Automate IO After Setup](/assets/Automate%20IO%20After%20Setup.png)
+
+### Part 3: Seting up the action app
+1. In the **Select Action App** drop menu, search for and select an application of your choice. We will use **Slack - Send a Direct Message** action as an example.
+1. Automate.io will prompt you to integrate your application credentials in order to use the application as an action app.
+1. Slack has 2 required fields, **username** and **message**.
+1. As shown below, you can use the content included in the Tableau Webhook to generate a unique message by clicking on the **plus** button to the right:
+![Automate IO Action](/assets/Automate%20IO%20Action.png)
+1. Save the **Bot** and turn it on.
+
+### Part 4: Verifying your Automate.io integration
+1. Trigger the Webhook you've created in Part 2.
+1. Verify that your workflow has worked.
+1. For our Slack integration, the final message should look something like this:
+![Slack Message](/assets/Slack%20Message.png)
